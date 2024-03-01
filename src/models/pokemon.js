@@ -11,7 +11,13 @@ export function define (sequelize,DataType){
         },
         type:{
             type:DataType.STRING,
-            allowNull : false
+            allowNull : false,
+            get (){
+                return this.getDataValue('type').split()
+            },
+            set (type){
+                this.setDataValue('type',type.join())
+            }
         }
     },{
         timestamps:true,

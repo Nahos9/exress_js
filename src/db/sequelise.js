@@ -20,16 +20,16 @@ const  sequelize = new Sequelize(
 // .then(_=>console.log('connexion établie à la base de données'))
 // .catch(error => console.error(`Impossible de se connecté ${error}`))
 
-const pokemonModel = define(sequelize,DataTypes)
+export const PokemonModel = define(sequelize,DataTypes)
 
 export const initDB =()=>{
     return sequelize.sync({force : true})
     .then(_=>{
         pokemons.map(pokemon => {
-            pokemonModel.create({
+            PokemonModel.create({
                 name:pokemon.name,
-                type: pokemon.type.join()
-            }).then(buzz => console.log(buzz.toJSON()))
+                type: pokemon.type
+            })
         })
         console.log('Syncronisation établie avec success!!')
     })
