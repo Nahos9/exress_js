@@ -5,10 +5,20 @@ export const deletePokemon =(app)=>{
 
       PokemonModel.findByPk(req.params.id)
         .then(pokemon=>{
+            if(pokemon === null){
+                const message = "Le pokemon n'existe pas!!"
+                res.status(404).json({message})
+            }
             const pokemonDestroy = pokemon
-            PokemonModel.destroy({where :{id:pokemon.id}})
+           return PokemonModel.destroy({where :{id:pokemon.id}})
+           .then(_=>{
             const message = `Le pokemon avec l'indentifiant ${pokemon.id} a été supprimmé`
             res.json({message,dat:pokemonDestroy})
+           })
+        })
+        .catch(error=>{
+            const message = `Le pokemon n'as pas pu être supprimmé`
+            res.json({message,dat:error})
         })
     })
 }

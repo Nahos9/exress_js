@@ -7,7 +7,14 @@ export function define (sequelize,DataType){
         },
         name:{
             type:DataType.STRING,
-            allowNull:false
+            allowNull:false,
+            // unique:{
+            //     msg : 'Le nom existe déjà!!'
+            // },
+            validate:{
+                notNull : {msg:'Le champ doit-être renseigné!!'},
+                notEmpty:{msg:'Le champ ne doit pas être vide ooooh!!'}
+            }
         },
         type:{
             type:DataType.STRING,

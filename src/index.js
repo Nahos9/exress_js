@@ -1,7 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
-import {pokemons} from './db/data.js'
 import { initDB } from './db/sequelise.js'
 import { findAllPokemon } from './routes/findPokemons.js'
 import { findPokemonById } from './routes/findPokemonById.js'
@@ -12,7 +11,6 @@ import { deletePokemon } from './routes/deletePokemon.js'
 const app = express()
 const port = 3000
 
-let copyPokemons = pokemons
 
 //initialise la base de données
 initDB()
@@ -33,6 +31,12 @@ findPokemonById(app)
 createPokemon(app)
 updatePokemon(app)
 deletePokemon(app)
+
+
+app.use(({res}) => {
+    const message ="Imossible d'acceder à la ressource demandée, vérifiez l'URL"
+    res.status(404).json({message})
+})
 app.listen(port,(error)=>{
     if(error){
         throw error

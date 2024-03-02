@@ -34,6 +34,33 @@ export let pokemons = [
             'poison'
         ],
         create_at:new Date()
+    },
+    {
+        id:5,
+        name:"chien",
+        type: [
+            'pilonce',
+            'poison'
+        ],
+        create_at:new Date()
+    },
+    {
+        id:6,
+        name:"chat",
+        type: [
+            'pilonce',
+            'poison'
+        ],
+        create_at:new Date()
+    },
+    {
+        id:7,
+        name:"loup",
+        type: [
+            'pilonce',
+            'poison'
+        ],
+        create_at:new Date()
     }
 
 ]
