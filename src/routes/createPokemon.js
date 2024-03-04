@@ -1,9 +1,10 @@
 import { UniqueConstraintError, ValidationError } from "sequelize"
 import { PokemonModel } from "../db/sequelise.js"
+import { authMidelwere } from "../auth/auth_midelwere.js";
 
 
 export const createPokemon =(app)=>{
-    app.post('/api/pokemons',(req,res)=>{
+    app.post('/api/pokemons',authMidelwere,(req,res)=>{
         PokemonModel.create(req.body)
         .then(data=>{
             const message = 'pokemon crée avec success!!'

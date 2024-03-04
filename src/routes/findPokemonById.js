@@ -1,7 +1,8 @@
+import { authMidelwere } from "../auth/auth_midelwere.js"
 import { PokemonModel } from "../db/sequelise.js"
 
 export const findPokemonById = (app) =>{
-    app.get('/api/pokemons/:id',(req,res)=>{
+    app.get('/api/pokemons/:id',authMidelwere,(req,res)=>{
         const id = parseInt(req.params.id)
         PokemonModel.findByPk(id)
         .then(pokemon=>{

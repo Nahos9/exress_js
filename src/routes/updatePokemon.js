@@ -1,7 +1,8 @@
+import { authMidelwere } from "../auth/auth_midelwere.js"
 import { PokemonModel } from "../db/sequelise.js"
 
 export const updatePokemon = (app)=>{
-    app.put('/api/pokemons/:id',(req,res)=>{
+    app.put('/api/pokemons/:id',authMidelwere,(req,res)=>{
         const id = req.params.id
         PokemonModel.update(req.body,{
             where : {id:id}

@@ -1,8 +1,9 @@
+import { authMidelwere } from "../auth/auth_midelwere.js"
 import { PokemonModel } from "../db/sequelise.js"
 import {Op} from 'sequelize'
 
 export const findAllPokemon = (app) => {
-    app.get('/api/pokemons',(req,res)=>{
+    app.get('/api/pokemons',authMidelwere,(req,res)=>{
         const name = req.query.name
         if(req.query.name){
             if(name.length < 2){

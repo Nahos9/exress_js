@@ -1,5 +1,4 @@
 import express from 'express'
-import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import { initDB } from './db/sequelise.js'
 import { findAllPokemon } from './routes/findPokemons.js'
@@ -10,7 +9,7 @@ import { deletePokemon } from './routes/deletePokemon.js'
 import { login } from './routes/login.js'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 
 //initialise la base de données
@@ -23,9 +22,10 @@ initDB()
 
 //midelweres
 app
-.use(morgan('dev'))
 .use(bodyParser.json())
-
+app.get('/',(req,res)=>{
+    res.json('Hello, Heroku!!')
+})
 //nos differents endpoints
 findAllPokemon(app)
 findPokemonById(app)

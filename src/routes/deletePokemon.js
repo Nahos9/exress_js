@@ -1,7 +1,8 @@
+import { authMidelwere } from "../auth/auth_midelwere.js"
 import { PokemonModel } from "../db/sequelise.js"
 
 export const deletePokemon =(app)=>{
-    app.delete('/api/pokemons/:id',(req,res)=>{
+    app.delete('/api/pokemons/:id',authMidelwere,(req,res)=>{
 
       PokemonModel.findByPk(req.params.id)
         .then(pokemon=>{
