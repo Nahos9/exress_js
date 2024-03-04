@@ -1,7 +1,8 @@
 import { Sequelize,DataTypes } from "sequelize";
 import { define } from "../models/pokemon.js";
 import { pokemons } from "./data.js";
-
+import { userDefine } from "../models/user.js";
+import bcrypt from 'bcrypt'
 const  sequelize = new Sequelize(
     'pokedex',
     'root',
@@ -21,6 +22,7 @@ const  sequelize = new Sequelize(
 // .catch(error => console.error(`Impossible de se connecté ${error}`))
 
 export const PokemonModel = define(sequelize,DataTypes)
+export const userModel = userDefine(sequelize,DataTypes)
 
 export const initDB =()=>{
     return sequelize.sync({force : true})
@@ -31,6 +33,14 @@ export const initDB =()=>{
                 type: pokemon.type
             })
         })
+        bcrypt.hash('passer',10)
+        .then(encrytPassword=>{
+           userModel.create({
+            name : 'toto',
+            password : encrytPassword
+           })
+        })
+        
         console.log('Syncronisation établie avec success!!')
     })
 }

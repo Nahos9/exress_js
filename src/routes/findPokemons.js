@@ -3,13 +3,19 @@ import {Op} from 'sequelize'
 
 export const findAllPokemon = (app) => {
     app.get('/api/pokemons',(req,res)=>{
+        const name = req.query.name
         if(req.query.name){
-            const name = req.query.name
+            if(name.length < 2){
+                const msg = "ce champ doit avoir au moins de caractères"
+                res.status(400).json({msg})
+            }
+            const limite  = parseInt(req.query.limit) || 5
             PokemonModel.findAndCountAll({
                 where : {
                 name:{[Op.like]: `%${name}%`}
-            }
-            ,limit:5
+            },
+            order : ['name']
+            ,limit:limite
         }
             )
             .then(({count,rows})=>{

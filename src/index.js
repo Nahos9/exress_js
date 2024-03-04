@@ -7,6 +7,7 @@ import { findPokemonById } from './routes/findPokemonById.js'
 import { createPokemon } from './routes/createPokemon.js'
 import { updatePokemon } from './routes/updatePokemon.js'
 import { deletePokemon } from './routes/deletePokemon.js'
+import { login } from './routes/login.js'
 
 const app = express()
 const port = 3000
@@ -31,7 +32,8 @@ findPokemonById(app)
 createPokemon(app)
 updatePokemon(app)
 deletePokemon(app)
-
+//login
+login(app)
 
 app.use(({res}) => {
     const message ="Imossible d'acceder à la ressource demandée, vérifiez l'URL"
